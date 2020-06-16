@@ -1,0 +1,22 @@
+version: 0.2
+
+env:
+  variables:
+    TF_VERSION: "0.12.26"
+
+phases:
+  pre_build:
+    commands:
+      - apt-get update
+      - apt-get install sudo
+
+  build:
+    commands:
+      - bash run.sh
+
+  post_build:
+    commands:
+
+artifacts:
+  files:
+    - '**/*'

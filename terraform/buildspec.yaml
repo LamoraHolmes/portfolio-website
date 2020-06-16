@@ -1,0 +1,27 @@
+version: 0.2
+
+env:
+  variables:
+    TF_VERSION: "0.12.26"
+
+phases:
+  pre_build:
+    commands:
+      - apt-get update
+      - apt-get install sudo
+      - wget https://releases.hashicorp.com/terraform/$TF_VERSION/terraform_"$TF_VERSION"_linux_amd64.zip >/dev/null 2>&1
+      - unzip terraform_"$TF_VERSION"_linux_amd64.zip
+      - sudo mv terraform /bin
+      - rm terraform_"$TF_VERSION"_linux_amd64.zip
+
+  build:
+    commands:
+      # run the tf code
+      - bash scripts/run.sh
+
+  post_build:
+    commands:
+
+artifacts:
+  files:
+    - '**/*'
